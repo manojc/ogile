@@ -1,0 +1,59 @@
+{
+    "name": "venator",
+    "version": "0.0.0",
+    "description": "Masters Project and POC to combine Agile (Scrum) & OKR in a Single Application",
+    "main": "server.js",
+    "scripts": {
+        "start": "npm run tsc && node ./dist/app/server.js",
+        "init": "npm i && cd ui && npm i",
+        "test": "npm run test",
+        "tsc": "./node_modules/typescript/bin/tsc",
+        "tscw": "./node_modules/typescript/bin/tsc -w"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/manojc/venator.git"
+    },
+    "keywords": [
+        "node",
+        "express",
+        "angular",
+        "mongo",
+        "npm",
+        "scrum",
+        "OKR",
+        "POC",
+        "SPA"
+    ],
+    "author": "manojc <chalodem@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/manojc/venator/issues"
+    },
+    "homepage": "https://github.com/manojc/venator#readme",
+    "dependencies": {
+        "@types/body-parser": "^1.17.0",
+        "@types/connect-mongo": "0.0.36",
+        "@types/dotenv": "^4.0.3",
+        "@types/express": "^4.16.0",
+        "@types/express-session": "^1.15.10",
+        "@types/mongoose": "^4.7.8",
+        "@types/morgan": "^1.7.35",
+        "@types/node": "^10.3.3",
+        "@types/node-uuid": "0.0.28",
+        "@types/nodemailer": "^4.6.0",
+        "connect-mongo": "^2.0.1",
+        "crypto": "^1.0.1",
+        "dotenv": "^6.0.0",
+        "express": "^4.16.3",
+        "express-session": "^1.15.6",
+        "mongoose": "^4.7.8",
+        "morgan": "^1.9.0",
+        "node-uuid": "^1.4.8",
+        "nodemailer": "^4.6.7"
+    },
+    "devDependencies": {
+        "aglio": "^2.3.0",
+        "typescript": "^2.9.2"
+    }
+}
