@@ -1,8 +1,7 @@
-import * as mongoose from "mongoose";
 import { DbSchema } from "./db.constants";
 import { Schema, model } from "mongoose";
 
-export let UsersCollection = model(DbSchema.Collections.Users, new Schema({
+export let UserSchema = new Schema({
 
     name: {
         type: String,
@@ -42,5 +41,7 @@ export let UsersCollection = model(DbSchema.Collections.Users, new Schema({
 
     additinlaInfo: {
         type: Array,
-    }
-}, { timestamps: true, versionKey: false, id: true }));
+    },
+}, { timestamps: true, versionKey: false, id: true });
+
+export let UsersCollection = model(DbSchema.Collections.Users, UserSchema);
