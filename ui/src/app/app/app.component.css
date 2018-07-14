@@ -1,0 +1,12 @@
+mat-toolbar {
+    position: fixed;
+    width: calc(100% - 10px);
+    top: 5px;
+    right: 5px;
+    z-index: 999;
+}
+.route-container {
+    margin-top: 64px;
+    position: absolute;
+    margin-bottom: 1000px;
+}
