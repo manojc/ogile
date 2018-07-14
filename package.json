@@ -4,7 +4,7 @@
     "description": "Masters Project and POC to combine Agile (Scrum) & OKR in a Single Application",
     "main": "server.js",
     "scripts": {
-        "start": "npm run tsc && node ./dist/app/server.js",
+        "start": "node ./dist/app/server.js",
         "init": "npm i && cd ui && npm i",
         "test": "npm run test",
         "tsc": "./node_modules/typescript/bin/tsc",

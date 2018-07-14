@@ -23,7 +23,7 @@ let mongoStore: connectMongo.MongoStoreFactory;
 function initMiddleware(): void {
     application.use(bodyParser.json());
     application.use(bodyParser.urlencoded({ extended: false }));
-    application.use('/', express.static(path.join(__dirname, "./public/")));
+    application.use('/', express.static(path.join(__dirname, "../public/")));
     application.use(session({
         secret: process.env.SESSION_SECRET,
         resave: false,

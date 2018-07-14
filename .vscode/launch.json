@@ -7,7 +7,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Server Process",
+            "name": "App",
             "program": "${workspaceRoot}/server/app/server.ts",
             "preLaunchTask": "npm: tsc",
             "cwd": "${workspaceRoot}",
