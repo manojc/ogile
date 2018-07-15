@@ -1,12 +1,20 @@
-mat-toolbar {
-    position: fixed;
-    width: calc(100% - 10px);
-    top: 5px;
-    right: 5px;
-    z-index: 999;
+.sidenav-container {
+    height: 100%;
 }
-.route-container {
-    margin-top: 64px;
-    position: absolute;
-    margin-bottom: 1000px;
+  
+.sidenav {
+    width: 200px;
+}
+  
+.mat-toolbar.mat-primary {
+    position: sticky;
+    top: 0;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.side-menu {
+    font-size: 4rem;
 }

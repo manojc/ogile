@@ -13,7 +13,6 @@ import { MatButtonModule, MatIconModule, MatListModule } from '@angular/material
 //components
 import { AppComponent } from './app/app.component';
 import { HomeComponent } from './home/home.component';
-import { SidenavigationComponent } from './sidenavigation/sidenavigation.component';
 
 //services
 
@@ -37,8 +36,7 @@ import { Routes } from './app.routes';
     ],
     declarations: [
         AppComponent,
-        HomeComponent,
-        SidenavigationComponent
+        HomeComponent
     ],
     providers: [],
     bootstrap: [AppComponent]
