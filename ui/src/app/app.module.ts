@@ -1,9 +1,10 @@
 //angular modules
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from "@angular/router";
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { NgModule } from '@angular/core';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 //external modules
 
@@ -17,18 +18,27 @@ import { HomeComponent } from './home/home.component';
 
 //routes (always last)
 import { Routes } from './app.routes';
+import { SidenavigationComponent } from './sidenavigation/sidenavigation.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatButtonModule, MatIconModule, MatListModule } from '@angular/material';
 
 @NgModule({
     imports: [
         BrowserModule,
-        NoopAnimationsModule,
+        BrowserAnimationsModule,
         MatToolbarModule,
+        MatSidenavModule,
         //always last
-        RouterModule.forRoot(Routes)
+        RouterModule.forRoot(Routes),
+        LayoutModule,
+        MatButtonModule,
+        MatIconModule,
+        MatListModule
     ],
     declarations: [
         AppComponent,
-        HomeComponent
+        HomeComponent,
+        SidenavigationComponent
     ],
     providers: [],
     bootstrap: [AppComponent]
