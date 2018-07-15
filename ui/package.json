@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "scripts": {
         "ng": "./node_modules/@angular/cli/bin/ng",
-        "start": "./node_modules/@angular/cli/bin/ng serve",
+        "start": "./node_modules/@angular/cli/bin/ng serve --live-reload false",
         "build": "./node_modules/@angular/cli/bin/ng build",
         "buildw": "./node_modules/@angular/cli/bin/ng build --watch",
         "test": "./node_modules/@angular/cli/bin/ng test",
@@ -24,6 +24,7 @@
         "@angular/platform-browser-dynamic": "^6.0.6",
         "@angular/router": "^6.0.6",
         "core-js": "^2.5.4",
+        "ngx-cookie-service": "^1.0.10",
         "rxjs": "^6.0.0",
         "zone.js": "^0.8.26"
     },

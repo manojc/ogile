@@ -1,18 +1,30 @@
 //angular modules
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { CookieService } from 'ngx-cookie-service';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatButtonModule, MatIconModule, MatListModule } from '@angular/material';
+import { 
+    MatButtonModule, 
+    MatIconModule,
+    MatListModule,
+    MatFormFieldModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatInputModule,
+    MatSelectModule
+} from '@angular/material';
 
 //external modules
 
 //components
 import { AppComponent } from './app/app.component';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 //services
 
@@ -24,6 +36,7 @@ import { Routes } from './app.routes';
 @NgModule({
     imports: [
         BrowserModule,
+        ReactiveFormsModule,
         BrowserAnimationsModule,
         MatToolbarModule,
         MatSidenavModule,
@@ -31,14 +44,21 @@ import { Routes } from './app.routes';
         MatButtonModule,
         MatIconModule,
         MatListModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
         //always last
         RouterModule.forRoot(Routes)
     ],
     declarations: [
         AppComponent,
-        HomeComponent
+        HomeComponent,
+        LoginComponent,
+        RegisterComponent,
+        ErrorPageComponent
     ],
-    providers: [],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    providers: [CookieService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

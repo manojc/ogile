@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { StorageService } from '../shared/services/storage/storage.service';
 
 @Component({
     selector: 'app-root',
@@ -6,6 +7,15 @@ import { Component } from '@angular/core';
     styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
-    title = 'app';
+export class AppComponent implements OnInit {
+
+    public user: any;
+
+    public constructor(private _StorageService: StorageService) {
+        this.user = this._StorageService.getItem("user", "local");
+    }
+
+    public ngOnInit(): void {
+    }
+
 }
