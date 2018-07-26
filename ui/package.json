@@ -6,6 +6,7 @@
         "start": "./node_modules/@angular/cli/bin/ng serve --live-reload false",
         "build": "./node_modules/@angular/cli/bin/ng build",
         "buildw": "./node_modules/@angular/cli/bin/ng build --watch",
+        "prodbuildw": "./node_modules/@angular/cli/bin/ng build --aot --extract-css false --output-hashing none --prod --watch",
         "test": "./node_modules/@angular/cli/bin/ng test",
         "lint": "./node_modules/@angular/cli/bin/ng lint",
         "e2e": "./node_modules/@angular/cli/bin/ng e2e"
