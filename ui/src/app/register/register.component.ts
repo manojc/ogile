@@ -43,4 +43,7 @@ export class RegisterComponent implements OnInit {
     public ngOnInit(): void {
 
     }
+
+    public register(): void {
+    }
 }
