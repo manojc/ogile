@@ -14,7 +14,8 @@ import {
     MatToolbarModule,
     MatSidenavModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCardModule
 } from '@angular/material';
 
 //external modules
@@ -47,6 +48,7 @@ import { Routes } from './app.routes';
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
+        MatCardModule,
         //always last
         RouterModule.forRoot(Routes)
     ],

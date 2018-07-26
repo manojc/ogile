@@ -10,6 +10,21 @@ html, body {
     margin-right: 2rem !important;
 }
 
+.mtl {
+
+    margin-top: 20px;
+}
+
+.mtxl {
+
+    margin-top: 40px;
+}
+
+.mtxs {
+
+    margin-top: 5px;
+}
+
 .text-right {
     text-align: right;
 }

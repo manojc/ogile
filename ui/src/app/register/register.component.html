@@ -1,18 +1,16 @@
-<form [formGroup]="form">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-offset-3 col-lg-6">
-                <mat-form-field class="col-lg-12">
+<div class="container">
+    <mat-card class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 col-xs-12">
+        <form [formGroup]="form">
+            <div class="row">
+                <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <input matInput placeholder="Full Name" formControlName="name">
                     <mat-error *ngIf="form?.controls?.name?.hasError('required')">
                         Name is required
                     </mat-error>
                 </mat-form-field>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-offset-3 col-lg-6">
-                <mat-form-field class="col-lg-12">
+            <div class="row">
+                <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <input matInput placeholder="Username" formControlName="username">
                     <mat-error *ngIf="form?.controls?.username?.hasError('required')">
                         Username is required
@@ -22,10 +20,8 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-offset-3 col-lg-6">
-                <mat-form-field class="col-lg-12">
+            <div class="row">
+                <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <input type="email" matInput placeholder="Email" formControlName="email">
                     <mat-error *ngIf="form?.controls?.email?.hasError('email') && !form?.controls?.email?.hasError('required')">
                         Please enter a valid email address
@@ -35,10 +31,8 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-offset-3 col-lg-6">
-                <mat-form-field class="col-lg-12">
+            <div class="row">
+                <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <mat-select placeholder="Select City" formControlName="city">
                         <mat-option value="Latur" selected>Latur</mat-option>
                         <mat-option value="Pune">Pune</mat-option>
@@ -48,10 +42,8 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-offset-3 col-lg-6">
-                <mat-form-field class="col-lg-12">
+            <div class="row">
+                <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <input type="password" matInput placeholder="Password" formControlName="password">
                     <mat-error *ngIf="form?.controls?.password?.hasError('required')">
                         Password is required
@@ -61,28 +53,23 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-offset-3 col-lg-6">
-                <mat-form-field class="col-lg-12">
+            <div class="row">
+                <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <input matInput type="password" placeholder="Repeat Password" formControlName="repeatPassword">
                     <mat-error *ngIf="form?.controls?.repeatPassword?.hasError('required')">
                         Repeat password is required
                     </mat-error>
                 </mat-form-field>
             </div>
-        </div>
-        <div class="row mtl">
-            <div class="col-lg-offset-3 col-lg-6">
-                <button mat-raised-button color="primary" class="col-lg-12" (click)="register()">Register</button>
+            <div class="row mtl">
+                <button mat-raised-button color="primary" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" (click)="register()">Register</button>
             </div>
-        </div>
-        <div class="row mtxs">
-            <div class="col-lg-offset-3 col-lg-6 text-right">
-                <span>Already a member? &nbsp;</span>
-                <a [routerLink]="['/login']">Login Here!</a>
+            <div class="row mtxs">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">
+                    <span>Already a member? &nbsp;</span>
+                    <a [routerLink]="['/login']">Login Here!</a>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="headr"></div>
-</form>
+        </form>
+    </mat-card>
+</div>
