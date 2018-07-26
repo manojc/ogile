@@ -9,9 +9,8 @@
                 "ui"
             ],
             "env": {
-                "NODE_ENV": "development",
                 "PORT": "3000",
-                "MONGO_URL": "mongodb://localhost/venator",
+                "DATABASE_URL": "mongodb://localhost/ogile_db",
                 "LOG_FILE": "access.log",
                 "LOG_FILE_PATH": "../log",
                 "SESSION_SECRET": "venator app"

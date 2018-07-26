@@ -48,7 +48,7 @@ function initialiseLogger() {
 //initialise database
 function initDbConnection(): void {
     mongoStore = connectMongo(session);
-    connect(process.env.MONGO_URL)
+    connect(process.env.DATABASE_URL)
         .then(() => console.log('database connected!!'))
         .catch((error: any) => console.log(error));
 }
