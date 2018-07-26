@@ -22,7 +22,7 @@
             </button>
             <span class="side-menu">venator</span>
             <span class="spacer"></span>
-            <button class="mrs" *ngIf="!user?.id" mat-stroked-button color="basic" (click)="goToLogin()">Login</button>
+            <button *ngIf="!user?.id" mat-stroked-button color="basic" (click)="goToLogin()">Login</button>
             <!-- <button *ngIf="!user?.id" mat-stroked-button color="basic" (click)="goToRegister()">Register</button> -->
             <button *ngIf="!!user?.id" type="button" mat-icon-button (click)="rightDrawer.toggle()">
                 <mat-icon>menu</mat-icon>
