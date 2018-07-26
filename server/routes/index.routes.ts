@@ -3,12 +3,28 @@ import * as path from 'path';
 
 let router = Router();
 
-// router.get('index.html', (req: Request, res: Response, next: NextFunction) => {
-//     res.sendFile("index.html", { root: "./dist/public" });
-// });
+router.get('/runtime.js', (request, response, next) => {
+    response.sendFile("runtime.js", { root: "./dist/public" });
+});
 
-// router.get('**', (req: Request, res: Response, next: NextFunction) => {
-//     res.send("page not found!");
-// });
+router.get('/polyfills.js', (request, response, next) => {
+    response.sendFile("polyfills.js", { root: "./dist/public" });
+});
+
+router.get('/styles.js', (request, response, next) => {
+    response.sendFile("styles.js", { root: "./dist/public" });
+});
+
+router.get('/vendor.js', (request, response, next) => {
+    response.sendFile("vendor.js", { root: "./dist/public" });
+});
+
+router.get('/main.js', (request, response, next) => {
+    response.sendFile("main.js", { root: "./dist/public" });
+});
+
+router.get('**', (request, response, next) => {
+    response.sendFile("index.html", { root: "./dist/public" });
+});
 
 export let indexRoute: Router = router;
