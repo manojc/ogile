@@ -3,7 +3,6 @@
         {
             "name": "api",
             "script": "./dist/app/server.js",
-            "watch": true,
             "ignore_watch": [
                 "node_modules",
                 "server",
