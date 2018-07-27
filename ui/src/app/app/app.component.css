@@ -9,6 +9,13 @@
 .mat-toolbar.mat-primary {
     position: sticky;
     top: 0;
+    z-index: 9;
+}
+
+mat-progress-bar {
+    position: sticky;
+    top: 65px;
+    z-index: 9;
 }
 
 .spacer {

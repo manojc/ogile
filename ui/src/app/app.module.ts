@@ -15,7 +15,8 @@ import {
     MatSidenavModule,
     MatInputModule,
     MatSelectModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressBarModule
 } from '@angular/material';
 
 //external modules
@@ -28,6 +29,8 @@ import { RegisterComponent } from './register/register.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 
 //services
+import { HttpInterceptorService } from './shared/services/http-interceptor/http-interceptor.service';
+import { StorageService } from './shared/services/storage/storage.service';
 
 //pipes
 
@@ -49,6 +52,7 @@ import { Routes } from './app.routes';
         MatInputModule,
         MatSelectModule,
         MatCardModule,
+        MatProgressBarModule,
         //always last
         RouterModule.forRoot(Routes)
     ],
@@ -60,7 +64,11 @@ import { Routes } from './app.routes';
         ErrorPageComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    providers: [CookieService],
+    providers: [
+        CookieService,
+        StorageService,
+        HttpInterceptorService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

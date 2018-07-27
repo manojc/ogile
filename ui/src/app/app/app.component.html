@@ -16,11 +16,11 @@
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-        <mat-toolbar color="primary">
+        <mat-toolbar class="mat-primary" color="primary">
             <button type="button" mat-icon-button (click)="leftDrawer.toggle()">
                 <mat-icon>menu</mat-icon>
             </button>
-            <span class="side-menu">venator</span>
+            <span class="side-menu">Ogile</span>
             <span class="spacer"></span>
             <button *ngIf="!user?.id" mat-stroked-button color="basic" (click)="goToLogin()">Login</button>
             <!-- <button *ngIf="!user?.id" mat-stroked-button color="basic" (click)="goToRegister()">Register</button> -->
@@ -28,9 +28,12 @@
                 <mat-icon>menu</mat-icon>
             </button>
         </mat-toolbar>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
         <div class="container-fluid">
+            <!-- <h1>asasd</h1> -->
             <router-outlet></router-outlet>
         </div>
-        <ng-content></ng-content>
+        <ng-content>
+        </ng-content>
     </mat-sidenav-content>
 </mat-sidenav-container>
