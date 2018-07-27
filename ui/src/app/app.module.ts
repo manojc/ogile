@@ -2,6 +2,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
 import { RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookieService } from 'ngx-cookie-service';
@@ -31,6 +32,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 //services
 import { HttpInterceptorService } from './shared/services/http-interceptor/http-interceptor.service';
 import { StorageService } from './shared/services/storage/storage.service';
+import { EventsService } from './shared/services/events.service/events.service';
 
 //pipes
 
@@ -40,6 +42,7 @@ import { Routes } from './app.routes';
 @NgModule({
     imports: [
         BrowserModule,
+        HttpModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
         MatToolbarModule,
@@ -67,7 +70,8 @@ import { Routes } from './app.routes';
     providers: [
         CookieService,
         StorageService,
-        HttpInterceptorService
+        HttpInterceptorService,
+        EventsService
     ],
     bootstrap: [AppComponent]
 })

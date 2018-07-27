@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { catchError, map, tap, finalize } from 'rxjs/operators';
 import {
     XHRBackend,
@@ -11,11 +11,13 @@ import {
     Headers
 } from "@angular/http";
 import { Response as ApiResponse } from "../../models/response.model";
+import { EventsService, GLOBAL_EVENTS } from "../events.service/events.service";
 
 @Injectable()
 export class HttpInterceptorService extends Http {
     constructor(private _XHRBackend: XHRBackend,
-        private _RequestOptions: RequestOptions) {
+        private _RequestOptions: RequestOptions,
+        private _EventsService: EventsService) {
         super(_XHRBackend, _RequestOptions);
     }
 
@@ -57,7 +59,7 @@ export class HttpInterceptorService extends Http {
 
     private handleResponse(response: Observable<Response>): Observable<Response> {
         return response.pipe(
-            map(() => {  }),
+            map(() => { }),
             catchError(this.onCatch),
             tap(this.onSuccess.bind(this), this.onError.bind(this)),
             finalize(this.afterResponse.bind(this))
@@ -65,14 +67,16 @@ export class HttpInterceptorService extends Http {
     }
 
     private beforeRequest(url: string, body?: string): void {
+        this._EventsService.broadcast(GLOBAL_EVENTS.TOGGLE_LOADER, true);
     }
 
     private afterResponse(): void {
+        this._EventsService.broadcast(GLOBAL_EVENTS.TOGGLE_LOADER, false);
     }
 
     private onCatch(error: any, caught: Observable<Response>): Observable<Response> {
         console.log("interceptor catch called");
-        return Observable.throw(error);
+        return throwError(error);
     }
 
     private onSuccess(res: Response): void {

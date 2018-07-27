@@ -39,7 +39,7 @@ export let UserSchema = new Schema({
         type: Boolean
     },
 
-    additinlaInfo: {
+    additionalInfo: {
         type: Array,
     },
 }, { timestamps: true, versionKey: false, id: true });
