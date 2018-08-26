@@ -1,14 +1,15 @@
-import * as http from 'http';
-import * as debug from 'debug';
-import { app } from "./app";
+const http = require("http");
+const debug = require("debug");
+const initialiseApp = require("./app");
 
 debug('ts-express:server');
 
+const app = initialiseApp();
 const port = process.env.PORT || 3000;
 app.set('port', port);
 
 //error handler
-function onError(error: NodeJS.ErrnoException): void {
+function onError(error) {
     if (error.syscall !== 'listen') throw error;
     let bind = (typeof port === 'string') ? 'Pipe ' + port : 'Port ' + port;
     switch (error.code) {
@@ -26,14 +27,16 @@ function onError(error: NodeJS.ErrnoException): void {
 }
 
 //listener handler
-function onListening(): void {
+function onListening() {
     let addr = server.address();
     let bind = (typeof addr === 'string') ? `pipe ${addr}` : `port ${addr.port}`;
     debug(`Listening on ${bind}`);
     console.log(`\n\napplication is running on http://localhost:${(typeof addr === 'string') ? addr : addr.port}\n\n`);
 }
 
-export const server: http.Server = http.createServer(app)
+const server = http.createServer(app)
     .listen(port)
     .on('error', onError)
-    .on('listening', onListening)
+    .on('listening', onListening);
+
+module.exports = server;

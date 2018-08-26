@@ -1,12 +1,10 @@
-import { Request, Response, NextFunction } from "express";
-import { Response as ApiResponse } from "../model/response.model";
-import { User } from "../model/user.model";
-import { Validations } from "./messages";
+const express = require("express");
+const Validations = require("./messages");
 
-export namespace UserValidator {
+class UserValidator {
 
-    export function validateLogin(req: Request, res: Response, next: NextFunction): void {
-        let response: ApiResponse<User> = new ApiResponse();
+    static validateLogin(req, res, next) {
+        let response;
 
         if (req.session && req.session.user && req.session.user.id) {
             response.status = false;
@@ -36,8 +34,8 @@ export namespace UserValidator {
         return;
     }
 
-    export function validateRegister(req: Request, res: Response, next: NextFunction): void {
-        let response: ApiResponse<User> = new ApiResponse();
+    static validateRegister(req, res, next) {
+        let response
 
         if (req.session && req.session.user && req.session.user.id) {
             response.status = false;
@@ -93,8 +91,8 @@ export namespace UserValidator {
         return;
     }
 
-    export function validateUser(req: Request, res: Response, next: NextFunction): void {
-        let response: ApiResponse<User> = new ApiResponse();
+    static validateUser(req, res, next) {
+        let response;
 
         if (!req.session || !req.session.user || !req.session.user.id) {
             response.status = false;
@@ -105,8 +103,8 @@ export namespace UserValidator {
         return;
     }
 
-    export function validateAdmin(req: Request, res: Response, next: NextFunction): void {
-        let response: ApiResponse<User> = new ApiResponse();
+    static validateAdmin(req, res, next) {
+        let response;
 
         if (!req.session || !req.session.user || !req.session.user.isAdmin) {
             response.status = false;
@@ -117,3 +115,5 @@ export namespace UserValidator {
         return;
     }
 }
+
+module.exports = UserValidator;

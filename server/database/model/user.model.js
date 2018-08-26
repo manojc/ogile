@@ -1,7 +1,7 @@
-import { DbSchema } from "./db.constants";
-import { Schema, model } from "mongoose";
+const mongoose = require("mongoose");
+const DbSchema = require("./db.constants");
 
-export let UserSchema = new Schema({
+const UserSchema = new mongoose.Schema({
 
     name: {
         type: String,
@@ -44,4 +44,4 @@ export let UserSchema = new Schema({
     },
 }, { timestamps: true, versionKey: false, id: true });
 
-export let UsersCollection = model(DbSchema.Collections.Users, UserSchema);
+module.exports = mongoose.model(DbSchema.Collections.Users, UserSchema);

@@ -1,4 +1,4 @@
-export const Validations = {
+module.exports = {
     User: {
         required: "user details are required",
         userNotFound: {
@@ -47,4 +47,4 @@ export const Validations = {
             required: "response can not be left blank"
         }
     }
-}
+};

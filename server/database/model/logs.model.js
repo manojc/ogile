@@ -1,7 +1,7 @@
-import { model, Schema, Model, Document } from "mongoose";
-import { DbSchema } from "./db.constants";
+const mongoose = require("mongoose");
+const DbSchema = require("./db.constants");
 
-export let LogsCollection: Model<Document> = model(DbSchema.Collections.Logs, new Schema({
+const LogSchema = new mongoose.Schema({
     sessionId: {
         type: String,
         required: [true, "session id is required"]
@@ -10,8 +10,8 @@ export let LogsCollection: Model<Document> = model(DbSchema.Collections.Logs, ne
         type: String,
         required: [true, "API method is required"],
         validate: {
-            validator: (value: string) => {
-                let verbs: Array<string> = ["GET", "POST", "PUT", "HEAD", "DELETE", "PATCH", "OPTIONS"];
+            validator: (value) => {
+                let verbs = ["GET", "POST", "PUT", "HEAD", "DELETE", "PATCH", "OPTIONS"];
                 return verbs.indexOf(value.trim().toUpperCase()) > -1;
             },
             message: "invalid HTTP verb"
@@ -30,4 +30,6 @@ export let LogsCollection: Model<Document> = model(DbSchema.Collections.Logs, ne
     metadata: {
         type: Object
     }
-}, { timestamps: true, versionKey: false, id: true }));
+}, { timestamps: true, versionKey: false, id: true })
+
+module.exports = mongoose.model(DbSchema.Collections.Logs, LogSchema);

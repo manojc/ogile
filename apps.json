@@ -2,7 +2,7 @@
     "apps": [
         {
             "name": "api",
-            "script": "./dist/app/server.js",
+            "script": "./server/app/server.js",
             "ignore_watch": [
                 "node_modules",
                 "server",
@@ -13,7 +13,7 @@
                 "DATABASE_URL": "mongodb://localhost/ogile_db",
                 "LOG_FILE": "access.log",
                 "LOG_FILE_PATH": "../log",
-                "SESSION_SECRET": "venator app"
+                "SESSION_SECRET": "ogile-app"
             },
             "env_production": {
                 "NODE_ENV": "production"

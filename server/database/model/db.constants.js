@@ -1,6 +1,4 @@
-import { Document } from "mongoose";
-
-export const DbSchema = {
+module.exports = {
     Collections: {
         Logs: "logs",
         Users: "users"

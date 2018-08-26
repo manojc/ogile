@@ -1,26 +1,26 @@
-import * as express from 'express';
-import * as session from 'express-session';
-import * as bodyParser from 'body-parser';
-import * as logger from 'morgan';
-import * as crypto from "crypto";
-import * as uuid from "node-uuid";
-import * as fs from 'fs';
-import * as path from 'path';
-import * as connectMongo from 'connect-mongo';
-import { initialiseRouter } from '../routes/router';
-import { connect } from "../database/connect";
-import * as dotenv from "dotenv";
+const express = require("express");
+const session = require("express-session");
+const bodyParser = require("body-parser");
+const logger = require("morgan");
+const crypto = require("crypto");
+const uuid = require("node-uuid");
+const fs = require("fs");
+const path = require("path");
+const connectMongo = require("connect-mongo");
+
+const router = require("../routes/router");
+const connect = require("../database/connect");
 
 //load environment configuration file.
-dotenv.load();
+require("dotenv").load();
 
 //express application instance
-let application: express.Application;
+let application;
 //mongoose store
-let mongoStore: connectMongo.MongoStoreFactory;
+let mongoStore;
 
 //initialise middleware
-function initMiddleware(): void {
+function initMiddleware() {
     application.use(bodyParser.json());
     application.use(bodyParser.urlencoded({ extended: false }));
     application.use('/', express.static(path.join(__dirname, "../public/")));
@@ -28,7 +28,7 @@ function initMiddleware(): void {
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
-        genid: (req: express.Request) => {
+        genid: (req) => {
             return crypto.createHash('sha256').update(uuid.v1()).update(crypto.randomBytes(256)).digest("hex");
         }
     }));
@@ -36,9 +36,9 @@ function initMiddleware(): void {
 
 //initialise logging
 function initialiseLogger() {
-    let logDirectory: string = path.join(__dirname, process.env.LOG_FILE_PATH);
+    let logDirectory = path.join(__dirname, process.env.LOG_FILE_PATH);
     fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
-    let accessLogStream: fs.WriteStream = fs.createWriteStream(
+    let accessLogStream = fs.createWriteStream(
         path.join(logDirectory, process.env.LOG_FILE), {
             flags: 'a'
         });
@@ -46,20 +46,19 @@ function initialiseLogger() {
 }
 
 //initialise database
-function initDbConnection(): void {
+function initDbConnection() {
     mongoStore = connectMongo(session);
     connect(process.env.DATABASE_URL)
         .then(() => console.log('database connected!!'))
-        .catch((error: any) => console.log(error));
+        .catch((error) => console.log(error));
 }
 
 //IIFE
-(() => {
+module.exports = function initialiseApp() {
     application = express();
     initMiddleware();
     initialiseLogger();
-    initialiseRouter(application);
+    router(application);
     initDbConnection();
-})();
-
-export const app: express.Application = application;
+    return application;
+}
