@@ -8,22 +8,17 @@
             "type": "node",
             "request": "launch",
             "name": "App",
-            "program": "${workspaceRoot}/server/app/server.ts",
+            "program": "${workspaceRoot}/server/app/server.js",
             "cwd": "${workspaceRoot}",
             "env": {
                 "PORT": "3000",
                 "DATABASE_URL": "mongodb://localhost/ogile_db",
                 "LOG_FILE": "access.log",
-                "LOG_FILE_PATH": "../log",
-                "SESSION_SECRET": "venator app"
+                "LOG_FILE_PATH": "../../logs",
+                "SESSION_SECRET": "ogile_app"
             },
-            "skipFiles": [
-                "node_modules/**/*.js"
-            ],
-            "outFiles": [
-                "${workspaceRoot}/dist/**/*.js"
-            ],
-            "console": "internalConsole"
+            "console": "internalConsole",
+            "runtimeExecutable": "/home/kepler/.nvm/versions/node/v10.9.0/bin/node"
         }
     ]
 }

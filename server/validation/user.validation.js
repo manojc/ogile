@@ -4,7 +4,7 @@ const Validations = require("./messages");
 class UserValidator {
 
     static validateLogin(req, res, next) {
-        let response;
+        let response = { status: true};
 
         if (req.session && req.session.user && req.session.user.id) {
             response.status = false;
@@ -35,7 +35,7 @@ class UserValidator {
     }
 
     static validateRegister(req, res, next) {
-        let response
+        let response = { status: true };
 
         if (req.session && req.session.user && req.session.user.id) {
             response.status = false;
@@ -92,7 +92,7 @@ class UserValidator {
     }
 
     static validateUser(req, res, next) {
-        let response;
+        let response = { status: true};
 
         if (!req.session || !req.session.user || !req.session.user.id) {
             response.status = false;
@@ -104,7 +104,7 @@ class UserValidator {
     }
 
     static validateAdmin(req, res, next) {
-        let response;
+        let response = { status: true};
 
         if (!req.session || !req.session.user || !req.session.user.isAdmin) {
             response.status = false;

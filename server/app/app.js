@@ -1,9 +1,8 @@
+const mongoose = require("mongoose");
 const express = require("express");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
-const crypto = require("crypto");
-const uuid = require("node-uuid");
 const fs = require("fs");
 const path = require("path");
 const connectMongo = require("connect-mongo");
@@ -16,8 +15,6 @@ require("dotenv").load();
 
 //express application instance
 let application;
-//mongoose store
-let mongoStore;
 
 //initialise middleware
 function initMiddleware() {
@@ -28,8 +25,8 @@ function initMiddleware() {
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
-        genid: (req) => {
-            return crypto.createHash('sha256').update(uuid.v1()).update(crypto.randomBytes(256)).digest("hex");
+        genid: () => {
+            return "qwert-1234-asdasd-poipoi-1234";
         }
     }));
 }
@@ -47,8 +44,7 @@ function initialiseLogger() {
 
 //initialise database
 function initDbConnection() {
-    mongoStore = connectMongo(session);
-    connect(process.env.DATABASE_URL)
+    mongoose.connect(process.env.DATABASE_URL, { useMongoClient: true })
         .then(() => console.log('database connected!!'))
         .catch((error) => console.log(error));
 }
