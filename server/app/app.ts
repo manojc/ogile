@@ -1,3 +1,4 @@
+import { connect } from "mongoose";
 import * as express from 'express';
 import * as session from 'express-session';
 import * as bodyParser from 'body-parser';
@@ -6,9 +7,7 @@ import * as crypto from "crypto";
 import * as uuid from "node-uuid";
 import * as fs from 'fs';
 import * as path from 'path';
-import * as connectMongo from 'connect-mongo';
 import { initialiseRouter } from '../routes/router';
-import { connect } from "../database/connect";
 import * as dotenv from "dotenv";
 
 //load environment configuration file.
@@ -16,8 +15,6 @@ dotenv.load();
 
 //express application instance
 let application: express.Application;
-//mongoose store
-let mongoStore: connectMongo.MongoStoreFactory;
 
 //initialise middleware
 function initMiddleware(): void {
@@ -47,8 +44,7 @@ function initialiseLogger() {
 
 //initialise database
 function initDbConnection(): void {
-    mongoStore = connectMongo(session);
-    connect(process.env.DATABASE_URL)
+    connect(process.env.DATABASE_URL, { useMongoClient: true })
         .then(() => console.log('database connected!!'))
         .catch((error: any) => console.log(error));
 }
