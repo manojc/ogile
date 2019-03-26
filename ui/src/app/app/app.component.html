@@ -1,0 +1,58 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #leftDrawer class="sidenav">
+        <mat-toolbar color="primary">Menu</mat-toolbar>
+        <mat-nav-list>
+            <a mat-list-item class="txt-blue" *ngIf="!!user?.organisationIds && !!user?.organisationIds.length" (click)="leftDrawer.toggle()" routerLink="/">
+                <i class="material-icons txt-blue mrxs">developer_board</i>
+                Dashboard
+            </a>
+            <a mat-list-item class="txt-blue" *ngIf="!!user?.organisationIds && !!user?.organisationIds.length" (click)="leftDrawer.toggle()" routerLink="/organisation/{{user.organisationId}}">
+                <i class="material-icons txt-blue mrxs">group_work</i>
+                My Organisation
+            </a>
+            <a mat-list-item class="txt-blue" *ngIf="!!user?.organisationIds && !!user?.organisationIds.length" (click)="leftDrawer.toggle()" routerLink="/team/list">
+                <i class="material-icons txt-blue mrxs">group</i>
+                My Team
+            </a>
+            <a mat-list-item class="txt-blue" *ngIf="!!user?.organisationIds && !!user?.organisationIds.length" (click)="leftDrawer.toggle()" routerLink="/quarters/list">
+                <i class="material-icons txt-blue mrxs">dashboard</i>
+                Quarters
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar class="mat-primary" color="primary">
+            <button *ngIf="!!user?._id" type="button" mat-icon-button (click)="leftDrawer.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <button mat-stroked-button color="basic" (click)="home()">
+                <mat-icon class="material-icons mrxs">home</mat-icon>
+                Ogile
+            </button>
+            <span class="spacer"></span>
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button *ngIf="!!user?._id" mat-menu-item (click)="profile()">
+                    <mat-icon class="material-icons txt-blue">face</mat-icon>
+                    <span class="txt-blue">Profile</span>
+                </button>
+                <button *ngIf="!user?._id" mat-menu-item (click)="login()">
+                    <mat-icon class="material-icons txt-blue">lock</mat-icon>
+                    <span class="txt-blue">Login</span>
+                </button>
+                <button *ngIf="!!user?._id" mat-menu-item (click)="logout()">
+                    <mat-icon class="material-icons txt-blue">exit_to_app</mat-icon>
+                    <span class="txt-blue">Logout</span>
+                </button>
+            </mat-menu>
+        </mat-toolbar>
+        <mat-progress-bar *ngIf="!!showLoader" mode="indeterminate"></mat-progress-bar>
+        <div class="container-fluid">
+            <router-outlet></router-outlet>
+        </div>
+        <ng-content>
+        </ng-content>
+    </mat-sidenav-content>
+</mat-sidenav-container>
