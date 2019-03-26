@@ -1,11 +1,18 @@
+require("dotenv").config();
+const mongoose = require("mongoose");
 const http = require("http");
-const router = require("./router");
+const router = require("./routes/index-router");
 
 // initialise http server
 const server = http
-    .createServer((req, res) => router(req, res, (req, res) => { }))
+    .createServer(async (req, res) => router(req, res, (req, res) => { }))
     .on("error", (error) => console.log(`HTTP Server - ${error.stack}`))
-    .listen(3000, () => console.log(`service started!`));
+    .listen(process.env.PORT, () => console.log(`service started!`));
+
+mongoose.Promise = global.Promise;
+mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
+    .then(() => console.log("database connected!"))
+    .catch((error) => console.log(error.stack));
 
 // unhandled promise rejection handler
 process.on("unhandledRejection", (reason, promise) => {

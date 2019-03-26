@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
                 if (!!user && !!user._id) {
                     this._EventsService.broadcast(GLOBAL_EVENTS.SET_USER, user);
                     this._StorageService.setItem("user", user, "local");
-                    this._Router.navigate([!!user["organisationId"] ? "/" : "/organisation/create"]);
+                    this._Router.navigate(["/"]);
                 }
             } catch (error) {
                 console.error(error);

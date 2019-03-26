@@ -47,10 +47,8 @@ export class AppComponent implements OnInit, OnDestroy {
         this._Router.navigate([!!this.user ? "" : "login"]);
     }
 
-    public async logout(): Promise<void> {
+    public logout(): void {
         try {
-            const httpResponse = this._Http.post(API_URL.LOGOUT, null);
-            await this._Http.toModel(httpResponse);
             this.user = null;
             this._StorageService.setItem("user", null, "local");
             this._Router.navigate(["/login"]);
