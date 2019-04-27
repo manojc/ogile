@@ -1,16 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError, map, tap, finalize } from "rxjs/operators";
-import {
-    XHRBackend,
-    RequestOptions,
-    Request,
-    RequestOptionsArgs,
-    Response,
-    Http,
-    Headers
-} from "@angular/http";
-import { Response as ApiResponse } from "../../models/response.model";
+import { XHRBackend, RequestOptions, Request, RequestOptionsArgs, Response, Http, Headers } from "@angular/http";
 import { EventsService, GLOBAL_EVENTS } from "../events.service/events.service";
 
 @Injectable()
@@ -72,11 +63,11 @@ export class HttpInterceptorService extends Http {
     }
 
     private processResponse(response: Response): any {
-        const apiresponse: ApiResponse<any> = response.json();
+        const apiresponse: any = response.json();
         if (!apiresponse || !apiresponse.status) {
             this._EventsService.broadcast(GLOBAL_EVENTS.SHOW_SNACKBAR, apiresponse.messages[0]);
         }
-        
+
         return apiresponse.data;
     }
 
@@ -93,7 +84,7 @@ export class HttpInterceptorService extends Http {
         return throwError(error);
     }
 
-    private onSuccess(response: ApiResponse<any>): void {
+    private onSuccess(response: any): void {
     }
 
     private onError(error: any): void {

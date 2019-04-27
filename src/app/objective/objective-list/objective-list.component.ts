@@ -8,24 +8,23 @@ import { EventsService, GLOBAL_EVENTS } from "../../shared/services/events.servi
 import { StorageService } from "../../shared/services/storage/storage.service";
 
 const ELEMENT_DATA = [
-    { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-    { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-    { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-    { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-    { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-    { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-    { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-    { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-    { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-    { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
+    { id: 1, summary: "Hydrogen", keyResults: 1.0079, stories: "H", actions: "" },
+    { id: 2, summary: "Helium", keyResults: 4.0026, stories: "He", actions: "" },
+    { id: 3, summary: "Lithium", keyResults: 6.941, stories: "Li", actions: "" },
+    { id: 4, summary: "Beryllium", keyResults: 9.0122, stories: "Be", actions: "" },
+    { id: 5, summary: "Boron", keyResults: 10.811, stories: "B", actions: "" },
+    { id: 6, summary: "Carbon", keyResults: 12.0107, stories: "C", actions: "" },
+    { id: 7, summary: "Nitrogen", keyResults: 14.0067, stories: "N", actions: "" },
+    { id: 8, summary: "Oxygen", keyResults: 15.9994, stories: "O", actions: "" },
+    { id: 9, summary: "Fluorine", keyResults: 18.9984, stories: "F", actions: "" },
+    { id: 10, summary: "Neon", keyResults: 20.1797, stories: "Ne", actions: "" },
 ];
 
 @Component({
-    selector: 'app-objective-list',
-    templateUrl: './objective-list.component.html',
-    styleUrls: ['./objective-list.component.css']
+    selector: "app-objective-list",
+    templateUrl: "./objective-list.component.html",
+    styleUrls: ["./objective-list.component.css"]
 })
-
 export class ObjectiveListComponent implements OnInit {
 
     public displayedColumns: string[];
@@ -41,7 +40,11 @@ export class ObjectiveListComponent implements OnInit {
     ) { }
 
     public ngOnInit() {
-        this.displayedColumns = ['position', 'name', 'weight', 'symbol'];
+        this.displayedColumns = ["id", "summary", "keyResults", "stories", "action"];
         this.dataSource = ELEMENT_DATA;
+    }
+
+    public showDetails(objective: any): any {
+        console.log(objective);
     }
 }

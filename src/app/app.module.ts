@@ -14,8 +14,6 @@ import { SharedModule } from "./shared/shared.module";
 // components
 import { AppComponent } from "./app/app.component";
 import { HomeComponent } from "./home/home.component";
-import { LoginComponent } from "./login/login.component";
-import { RegisterComponent } from "./register/register.component";
 import { ErrorPageComponent } from "./error-page/error-page.component";
 
 // providers
@@ -42,8 +40,6 @@ import { Routes } from "./app.routes";
     declarations: [
         AppComponent,
         HomeComponent,
-        LoginComponent,
-        RegisterComponent,
         ErrorPageComponent
     ],
     providers: [AngularFireAuth],
