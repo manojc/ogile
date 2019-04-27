@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "scripts": {
         "ng": "node  ./node_modules/@angular/cli/bin/ng",
-        "start": "node  ./node_modules/@angular/cli/bin/ng serve",
+        "start": "node  ./node_modules/@angular/cli/bin/ng serve  --live-reload false",
         "build": "node  ./node_modules/@angular/cli/bin/ng build",
         "buildw": "node  ./node_modules/@angular/cli/bin/ng build --watch",
         "prodbuild": "node  ./node_modules/@angular/cli/bin/ng build --aot --extract-css false --output-hashing none --prod",

@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material";
-import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from "@angular/fire/auth";
-import { auth } from "firebase/app";
+import { auth, User } from "firebase/app";
 import { EventsService, GLOBAL_EVENTS } from "../shared/services/events.service/events.service";
 import { StorageService } from "../shared/services/storage/storage.service";
 
@@ -15,7 +14,7 @@ import { StorageService } from "../shared/services/storage/storage.service";
 
 export class AppComponent implements OnInit, OnDestroy {
 
-    public user: auth.UserCredential;
+    public user: User;
     public showLoader: boolean;
     public eventIds: Array<string>;
 
@@ -24,13 +23,12 @@ export class AppComponent implements OnInit, OnDestroy {
         private _StorageService: StorageService,
         private _EventsService: EventsService,
         private _MatSnackBar: MatSnackBar,
-        private _AngularFireDatabase: AngularFireDatabase,
         private _AngularFireAuth: AngularFireAuth
     ) { }
 
     public ngOnInit(): void {
         this.bindEvents();
-        this.user = this._StorageService.getItem("user", "local") as auth.UserCredential;
+        this.user = this._StorageService.getItem("user", "local") as User;
     }
 
     public ngOnDestroy(): void {
@@ -54,6 +52,7 @@ export class AppComponent implements OnInit, OnDestroy {
         try {
             await this._AngularFireAuth.auth.signOut();
             this._EventsService.broadcast(GLOBAL_EVENTS.SET_USER, null);
+            this._Router.navigate([""]);
         } catch (error) {
             console.error(error);
         }
@@ -64,7 +63,7 @@ export class AppComponent implements OnInit, OnDestroy {
             this._EventsService.on(GLOBAL_EVENTS.TOGGLE_LOADER, (showLoader: boolean) => {
                 this.showLoader = showLoader;
             }),
-            this._EventsService.on(GLOBAL_EVENTS.SET_USER, (user: auth.UserCredential) => {
+            this._EventsService.on(GLOBAL_EVENTS.SET_USER, (user: User) => {
                 this.user = user;
                 this._StorageService.setItem("user", user, "local");
             }),

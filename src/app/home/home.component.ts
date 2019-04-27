@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from "@angular/fire/auth";
-import { auth } from "firebase/app";
+import { User } from "firebase/app";
 import { EventsService, GLOBAL_EVENTS } from "../shared/services/events.service/events.service";
 import { StorageService } from "../shared/services/storage/storage.service";
 
@@ -12,7 +12,7 @@ import { StorageService } from "../shared/services/storage/storage.service";
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-    public user: auth.UserCredential;
+    public user: User;
     public eventIds: Array<string>;
 
     public constructor(
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit(): void {
-        this.user = this._StorageService.getItem("user", "local") as auth.UserCredential;
+        this.user = this._StorageService.getItem("user", "local") as User;
         this.bindEvents();
     }
 
@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     private bindEvents(): void {
         this.eventIds = [
-            this._EventsService.on(GLOBAL_EVENTS.SET_USER, (user: auth.UserCredential) => {
+            this._EventsService.on(GLOBAL_EVENTS.SET_USER, (user: User) => {
                 this.user = user;
                 this._StorageService.setItem("user", user, "local");
             })

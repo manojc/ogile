@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { HttpInterceptorService } from "../../shared/services/http-interceptor/http-interceptor.service";
+import { FormGroup, FormControl, FormArray, Validators } from "@angular/forms";
+import { AngularFireDatabase } from "angularfire2/database";
+import { User } from "firebase/app";
 import { StorageService } from "../../shared/services/storage/storage.service";
 import { EventsService, GLOBAL_EVENTS } from "../../shared/services/events.service/events.service";
+import { UUID } from "../../shared/models/uuid.model";
 
 @Component({
     selector: "app-create-objective",
@@ -13,28 +15,64 @@ import { EventsService, GLOBAL_EVENTS } from "../../shared/services/events.servi
 export class CreateObjectiveComponent implements OnInit {
 
     public form: FormGroup;
+    public user: User;
+    public selectedObjective: any;
 
     public constructor(
-        private _Http: HttpInterceptorService,
         private _Router: Router,
-        private _route: ActivatedRoute,
+        private _ActivatedRoute: ActivatedRoute,
         private _StorageService: StorageService,
-        private _EventsService: EventsService
+        private _EventsService: EventsService,
+        private _AngularFireDatabase: AngularFireDatabase
     ) { }
 
+    get keyResults(): FormArray { return this.form.get('keyResults') as FormArray; }
+
     public ngOnInit(): void {
-        this.form = new FormGroup({
-            name: new FormControl("", [
-                Validators.required
-            ]),
-            description: new FormControl("", [
-                Validators.required
-            ])
-        });
-        this.form.setValue({ name: "", description: "" });
+        this.user = this._StorageService.getItem("user", "local") as User;
+        if (this._ActivatedRoute.snapshot.queryParams.id) {
+            const objectives: any = this._StorageService.getItem("objectives", "local") as any[];
+            this.selectedObjective = objectives[this._ActivatedRoute.snapshot.queryParams.id];
+            this.form = new FormGroup({
+                name: new FormControl(this.selectedObjective.name, [Validators.required]),
+                description: new FormControl(this.selectedObjective.description, [Validators.required]),
+                keyResults: new FormArray(this.selectedObjective.keyResults.reduce((array, keyResult) => {
+                    array.push(new FormControl(keyResult, [Validators.required]));
+                    return array;
+                }, []))
+            });
+        } else {
+            this.form = new FormGroup({
+                name: new FormControl("", [Validators.required]),
+                description: new FormControl("", [Validators.required]),
+                keyResults: new FormArray([new FormControl(null, [Validators.required])])
+            });
+        }
+    }
+
+    public addKeyResult(): any {
+        this.keyResults.push(new FormControl(null, [Validators.required]));
+    }
+
+    public removeKeyResult(index): any {
+        this.keyResults.removeAt(index);
     }
 
     public async create(): Promise<any> {
+        if (this.form.valid) {
+            if (this._ActivatedRoute.snapshot.queryParams.id) {
+                await this._AngularFireDatabase
+                    .database
+                    .ref(`objectives/${this.user.uid}/${this.selectedObjective.id}`)
+                    .set({ uid: this.user.uid, id: this.selectedObjective.id, ...this.form.value })
+            } else {
+                const id = UUID.generate();
+                await this._AngularFireDatabase
+                    .database
+                    .ref(`objectives/${this.user.uid}/${id}`)
+                    .set({ uid: this.user.uid, id: id, ...this.form.value });
+            }
+            this._Router.navigate(["/objectives"]);
+        }
     }
-
 }

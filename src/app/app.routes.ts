@@ -7,8 +7,7 @@ import { AuthGuardService } from "./shared/services/auth-guard/auth-guard.servic
 export let Routes: Array<Route> = [
     {
         path: "",
-        component: HomeComponent,
-        canActivate: [AuthGuardService]
+        component: HomeComponent
     },
     {
         path: "objectives",
