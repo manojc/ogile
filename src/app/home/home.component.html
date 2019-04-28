@@ -1,7 +1,21 @@
 <div class="container mtxl">
-    <mat-card class="col-lg-12">
-        <div class="col-lg-12 text-center">
-            <h1>OGILE DASHBOARD</h1>
+    <div class="row">
+        <mat-card *ngIf="!user?.uid" class="col-lg-12">
+            <div class="col-lg-12 text-center">
+                <h1>OGILE DASHBOARD</h1>
+                <p class="text-center">login to access dashbaord details!</p>
+            </div>
+        </mat-card>
+        <div *ngIf="user?.uid && (!barChartData?.length || !barChartLabels?.length)" class="col-lg-12">
+            <mat-card class="col-lg-12 text-center">
+                <h1>OGILE DASHBOARD</h1>
+                <p class="text-center">no data to display!</p>
+            </mat-card>
         </div>
-    </mat-card>
+        <div *ngIf="user?.uid && barChartData?.length && barChartLabels?.length" class="col-lg-12">
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+            </canvas>
+        </div>
+    </div>
 </div>

@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { ChartsModule } from 'ng2-charts';
 
 //external modules
 import { SharedModule } from "./shared/shared.module";
@@ -34,6 +35,7 @@ import { Routes } from "./app.routes";
         AngularFireModule.initializeApp(environment.firebase, "ogile_ui"),
         AngularFireDatabaseModule,
         SharedModule,
+        ChartsModule,
         RouterModule.forRoot(Routes) //always last
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
