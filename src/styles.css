@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/fonts/font.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body {
+    height: 100%;
+}
+
+.txt-blue {
+    color: #3f51b5 !important;
+}
+
+.mrs {
+    margin-right: 2rem !important;
+}
+
+.mrxs {
+    margin-right: 10px;
+}
+
+.mtl {
+
+    margin-top: 20px;
+}
+
+.mtxl {
+
+    margin-top: 40px;
+}
+
+.mts {
+
+    margin-top: 10px;
+}
+
+.mtxs {
+
+    margin-top: 5px;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}

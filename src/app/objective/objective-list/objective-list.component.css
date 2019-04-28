@@ -1,0 +1,37 @@
+table {
+    width: 100%;
+}
+
+tr.mat-footer-row {
+    font-weight: bold;
+}
+
+th:nth-child(1),
+tr>td:nth-child(1) {
+    width: 10%;
+    text-align: center !important;
+}
+
+th:nth-child(3),
+tr>td:nth-child(3) {
+    width: 10%;
+    text-align: center !important;
+}
+
+th:nth-child(4),
+tr>td:nth-child(4) {
+    width: 10%;
+    text-align: center !important;
+}
+
+th:nth-child(5),
+tr>td:nth-child(5) {
+    width: 10%;
+    text-align: center !important;
+}
+
+th:nth-child(6),
+tr>td:nth-child(6) {
+    width: 15%;
+    text-align: center !important;
+}

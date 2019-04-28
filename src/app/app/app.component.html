@@ -1,0 +1,43 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #leftDrawer class="sidenav">
+        <mat-toolbar color="primary">Menu</mat-toolbar>
+        <mat-nav-list>
+            <a mat-list-item class="txt-blue" *ngIf="!!user?.email" (click)="leftDrawer.toggle()" routerLink="/">
+                <i class="material-icons txt-blue mrxs">developer_board</i>
+                Dashboard
+            </a>
+            <a mat-list-item class="txt-blue" *ngIf="!!user?.email" (click)="leftDrawer.toggle()"
+                routerLink="/objectives">
+                <i class="material-icons txt-blue mrxs">playlist_add_check</i>
+                Objectives
+            </a>
+            <a mat-list-item class="txt-blue" *ngIf="!!user?.email" (click)="leftDrawer.toggle()" routerLink="/stories">
+                <i class="material-icons txt-blue mrxs">playlist_add_check</i>
+                Stories
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar class="mat-primary" color="primary">
+            <h3>
+                <a class="nav-links" style="margin-left: 0;" routerLink="/"> OGILE </a>
+            </h3>
+            <a class="nav-links" mat-stroked-button color="basic" routerLink="/"> Home </a>
+            <a mat-stroked-button class="nav-links" *ngIf="user?.uid" color="basic" routerLink="/objectives"> Objectives</a>
+            <a mat-stroked-button class="nav-links" *ngIf="user?.uid" color="basic" routerLink="/stories"> Stories </a>
+            <span class="spacer"></span>
+            <button mat-stroked-button color="basic" *ngIf="!user?.uid" (click)="login()">
+                Login
+            </button>
+            <button mat-stroked-button color="basic" *ngIf="!!user?.uid" (click)="logout()">
+                Logout
+            </button>
+        </mat-toolbar>
+        <mat-progress-bar *ngIf="!!showLoader" mode="indeterminate"></mat-progress-bar>
+        <div class="container-fluid">
+            <router-outlet></router-outlet>
+        </div>
+        <ng-content>
+        </ng-content>
+    </mat-sidenav-content>
+</mat-sidenav-container>

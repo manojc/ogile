@@ -1,0 +1,98 @@
+<div class="container mtl">
+    <div class="col-lg-offset-2 col-lg-8">
+        <h2 *ngIf="editMode">Update Story</h2>
+        <h2 *ngIf="!editMode">Create New Story</h2>
+    </div>
+    <mat-card class="col-lg-offset-2 col-lg-8">
+        <form [formGroup]="form">
+            <div class="row">
+                <mat-form-field class="col-lg-12">
+                    <input matInput placeholder="story name" formControlName="name">
+                    <mat-error *ngIf="form?.controls?.name?.hasError('required')">
+                        story name is required!
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row mtl">
+                <mat-form-field class="col-lg-12">
+                    <input matInput type="number" placeholder="estimated time (hours)" formControlName="points">
+                    <mat-error *ngIf="form?.controls?.points?.hasError('required')">
+                        estimated time is required!
+                    </mat-error>
+                    <mat-error *ngIf="form?.controls?.points?.hasError('min')">
+                        minimum allowed estimated time is 1 hour
+                    </mat-error>
+                    <mat-error *ngIf="form?.controls?.points?.hasError('max')">
+                        maximum allowed estimated time is 40 hours
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row mtl">
+                <mat-form-field class="col-lg-12">
+                    <mat-label>objective</mat-label>
+                    <mat-select formControlName="selectedObjective">
+                        <mat-option *ngFor="let objective of ddlObjectives" [value]="objective.value">
+                            {{objective.text}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="row mtl">
+                <mat-form-field class="col-lg-12">
+                    <mat-label>key result</mat-label>
+                    <mat-select formControlName="selectedKeyResult">
+                        <mat-option *ngFor="let keyResult of ddlKeyResults" [value]="keyResult">
+                            {{keyResult}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="row mtl">
+                <mat-form-field class="col-lg-12">
+                    <textarea matInput placeholder="description" formControlName="description" rows="5"></textarea>
+                    <mat-error *ngIf="form?.controls?.name?.hasError('required')">
+                        story description is required!
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row mtl">
+                <div class="col-lg-3">
+                    <h3>Work Logs</h3>
+                </div>
+                <div class="col-lg-offset-7 col-lg-2">
+                    <h3><button class="btn btn-success btn-sm" (click)="addWorkLogs()">add new</button></h3>
+                </div>
+            </div>
+            <div class="row mtl">
+                <div formArrayName="workLogs" class="col-lg-12">
+                    <div *ngFor="let workLog of workLogs?.controls; index as i">
+                        <div class="row mtl">
+                            <div class="col-lg-10">
+                                <input type="number" matInput [formControlName]="i" placeholder="key result {{i+1}}">
+                                <mat-error *ngIf="workLog?.hasError('required')">
+                                    work log is required!
+                                </mat-error>
+                                <mat-error *ngIf="workLog?.hasError('min')">
+                                    minimum allowed work log is 1 hour
+                                </mat-error>
+                                <mat-error *ngIf="workLog?.hasError('max')">
+                                    maximum allowed work log is 40 hours
+                                </mat-error>
+                            </div>
+                            <div class="col-lg-2" *ngIf="(!editMode && workLogs?.controls?.length > 1) || (editMode && i >= selectedObjective?.workLogs?.length)">
+                                <button class="btn btn-danger btn-sm" (click)="removeWorkLogs(i)">remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mtl"></div>
+            <div class="row mtl">
+                <button mat-raised-button color="primary" class="col-lg-12" (click)="create()"
+                    [disabled]="!form?.valid">
+                    Create Story
+                </button>
+            </div>
+        </form>
+    </mat-card>
+</div>
