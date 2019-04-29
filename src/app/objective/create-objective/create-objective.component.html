@@ -64,7 +64,7 @@
             <div class="row mtl">
                 <button mat-raised-button color="primary" class="col-lg-12" (click)="create()"
                     [disabled]="!form?.valid">
-                    Create Objective
+                    {{!!editMode ? 'Update Objective' : 'Create Objective'}}
                 </button>
             </div>
         </form>

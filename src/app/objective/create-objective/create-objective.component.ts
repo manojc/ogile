@@ -80,13 +80,13 @@ export class CreateObjectiveComponent implements OnInit {
                 await this._AngularFireDatabase
                     .database
                     .ref(`objectives/${this.user.uid}/${this.selectedObjective.id}`)
-                    .set({ uid: this.user.uid, id: this.selectedObjective.id, ...this.form.value })
+                    .set({ uid: this.user.uid, id: this.selectedObjective.id, ...this.selectedObjective, ...this.form.value })
             } else {
                 const id = UUID.generate();
                 await this._AngularFireDatabase
                     .database
                     .ref(`objectives/${this.user.uid}/${id}`)
-                    .set({ uid: this.user.uid, id: id, ...this.form.value });
+                    .set({ uid: this.user.uid, id: id, ...this.selectedObjective, ...this.form.value });
             }
             this._Router.navigate(["/objectives"]);
         }

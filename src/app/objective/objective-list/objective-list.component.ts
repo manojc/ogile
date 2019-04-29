@@ -37,21 +37,27 @@ export class ObjectiveListComponent implements OnInit {
             .subscribe((response: any[]) => {
                 this.total = { weight: 0, keyResults: 0, stories: 0 };
                 response = response || [];
-                this.objectives = Object.values(response).reduce((source, item, index) => {
-                    this.total.weight += item["weight"];
-                    this.total.keyResults += item["keyResults"].length;
-                    item["stories"] = item["stories"] || {};
-                    this.total.stories += Object.values(item["stories"]).length;
-                    source.push({
-                        _id: index + 1,
-                        id: item.id,
-                        summary: item.name,
-                        weight: item.weight,
-                        keyResults: item.keyResults.length,
-                        stories: Object.values(item["stories"]).length
+                this.objectives = Object.values(response)
+                    .sort((obj1, obj2) => {
+                        if (obj1["name"] < obj2["name"]) return -1;
+                        if (obj1["name"] > obj2["name"]) return 1;
+                        return 0;
                     })
-                    return source;
-                }, []);
+                    .reduce((source, item, index) => {
+                        this.total.weight += item["weight"];
+                        this.total.keyResults += item["keyResults"].length;
+                        item["stories"] = item["stories"] || {};
+                        this.total.stories += Object.values(item["stories"]).length;
+                        source.push({
+                            _id: index + 1,
+                            id: item.id,
+                            summary: item.name,
+                            weight: item.weight,
+                            keyResults: item.keyResults.length,
+                            stories: Object.values(item["stories"]).length
+                        })
+                        return source;
+                    }, []);
                 this._StorageService.setItem("objectives", response, "local");
             });
     }

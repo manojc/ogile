@@ -54,10 +54,15 @@ export class HomeComponent implements OnInit, OnDestroy {
                     { data: [], label: "Completed Story Points" },
                     { data: [], label: "Total Story Points" }
                 ];
-                this.barChartLabels = [];
+                const barChartLabels = [];
                 response = response || {};
-                Object.values(response).forEach(objective => {
-                    this.barChartLabels.push(objective["name"]);
+                const objectives = Object.values(response).sort((obj1, obj2) => {
+                    if (obj1["name"] < obj2["name"]) return -1;
+                    if (obj1["name"] > obj2["name"]) return 1;
+                    return 0;
+                });
+                objectives.forEach(objective => {
+                    barChartLabels.push(objective["name"]);
                     objective["stories"] = objective["stories"] || {};
                     const totalPoints = Object.values(objective["stories"]).reduce((totalPoints, story) => {
                         totalPoints += story["points"];
@@ -69,11 +74,12 @@ export class HomeComponent implements OnInit, OnDestroy {
                             storyWorkLog += worklog;
                             return storyWorkLog;
                         }, 0);
-                        return completedPoints;                        
+                        return completedPoints;
                     }, 0);
                     barChartData[0].data.push(completedPoints);
                     barChartData[1].data.push(totalPoints);
                 });
+                this.barChartLabels = barChartLabels;
                 this.barChartData = barChartData;
             });
     }

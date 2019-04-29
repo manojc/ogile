@@ -63,7 +63,7 @@ export class CreateStoryComponent implements OnInit {
                 selectedKeyResult: new FormControl(this.ddlKeyResults[0], [Validators.required]),
                 points: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(40)]),
                 description: new FormControl(null, [Validators.required]),
-                workLogs: new FormArray([new FormControl(null, [Validators.required, Validators.min(1), Validators.max(40)])])
+                workLogs: new FormArray([])
             });
         }
     }

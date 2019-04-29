@@ -79,7 +79,7 @@
                                     maximum allowed work log is 40 hours
                                 </mat-error>
                             </div>
-                            <div class="col-lg-2" *ngIf="(!editMode && workLogs?.controls?.length > 1) || (editMode && i >= selectedObjective?.workLogs?.length)">
+                            <div class="col-lg-2" *ngIf="(!editMode) || (editMode && i >= selectedStory?.workLogs?.length)">
                                 <button class="btn btn-danger btn-sm" (click)="removeWorkLogs(i)">remove</button>
                             </div>
                         </div>
@@ -90,7 +90,7 @@
             <div class="row mtl">
                 <button mat-raised-button color="primary" class="col-lg-12" (click)="create()"
                     [disabled]="!form?.valid">
-                    Create Story
+                    {{!!editMode ? 'Update Story' : 'Create Story'}}
                 </button>
             </div>
         </form>

@@ -43,21 +43,27 @@ export class StoryListComponent implements OnInit {
                     item["stories"] = item["stories"] || [];
                     return [...source, ...Object.values(item["stories"])];
                 }, []);
-                this.stories = Object.values(all_stories).reduce((source, item, index) => {
-                    this.totalPoints += item.points;
-                    this.totalWorkLog = (item.workLogs || []).reduce((sum, item) => { return sum += item }, this.totalWorkLog);
-                    source.push({
-                        _id: index + 1,
-                        id: item.id,
-                        summary: item.name,
-                        oid: item.selectedObjective,
-                        objective: response[item.selectedObjective].name,
-                        keyResult: item.selectedKeyResult,
-                        points: item.points,
-                        workLog: (item.workLogs || []).reduce((sum, item) => { return sum += item }, 0)
+                this.stories = Object.values(all_stories)
+                    .sort((obj1, obj2) => {
+                        if (obj1["name"] < obj2["name"]) return -1;
+                        if (obj1["name"] > obj2["name"]) return 1;
+                        return 0;
                     })
-                    return source;
-                }, []);
+                    .reduce((source, item, index) => {
+                        this.totalPoints += item.points;
+                        this.totalWorkLog = (item.workLogs || []).reduce((sum, item) => { return sum += item }, this.totalWorkLog);
+                        source.push({
+                            _id: index + 1,
+                            id: item.id,
+                            summary: item.name,
+                            oid: item.selectedObjective,
+                            objective: response[item.selectedObjective].name,
+                            keyResult: item.selectedKeyResult,
+                            points: item.points,
+                            workLog: (item.workLogs || []).reduce((sum, item) => { return sum += item }, 0)
+                        })
+                        return source;
+                    }, []);
                 this._StorageService.setItem("objectives", response, "local");
             });
     }
